@@ -18,7 +18,7 @@ class CreateThreadsTest extends TestCase
 
         $this->get('/threads/create')
             ->assertRedirect('/login');
-        
+
         $this->post('/threads', [])
             ->assertRedirect('/login');
     }
@@ -34,7 +34,7 @@ class CreateThreadsTest extends TestCase
         $this->post('/threads', $thread->toArray());
 
         // Then, when we visit the thread page.
-        $this->get($thread->path())
+        $this->get($thread->path() . '1')
         // We should see the new thread
             ->assertSee($thread->title)
             ->assertSee($thread->body);
