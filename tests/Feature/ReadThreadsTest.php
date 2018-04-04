@@ -28,7 +28,7 @@ class ReadThreadsTest extends TestCase
     /** @test */
     public function a_user_can_read_a_single_thread()
     {
-        $response = $this->get('/threads/' . $this->thread->id);
+        $response = $this->get($this->thread->path());
         $response->assertSee($this->thread->title);
     }
 
@@ -40,7 +40,7 @@ class ReadThreadsTest extends TestCase
         $reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
 
         // When we visit a thread page
-        $response = $this->get('/threads/' . $this->thread->id);
+        $response = $this->get($this->thread->path());
 
         // Then we should see the replies
         $response->assertSee($reply->body);
