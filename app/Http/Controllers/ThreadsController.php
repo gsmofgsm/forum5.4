@@ -125,7 +125,9 @@ class ThreadsController extends Controller
             $threads = Thread::latest();
         }
 
-        $threads = $threads->filter($filters)->get();
-        return $threads;
+        $threads = $threads->filter($filters);
+
+        dd($threads->toSql());
+        return $threads->get();
     }
 }
