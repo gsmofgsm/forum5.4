@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class ThreadFilters extends Filters
 {
 
+    protected $filters = ['by'];
+
     /**
      * @param $username
      * @return mixed
