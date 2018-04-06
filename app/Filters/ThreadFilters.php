@@ -18,12 +18,23 @@ class ThreadFilters
 
     public function apply($builder)
     {
-        // We apply our filters to the builder
-        if(! $username = $this->request->by){
-            return $builder;
-        }
+        $this->builder = $builder;
 
+        // We apply our filters to the builder
+        if($this->request->has('by')){
+            $this->by($this->request->by);
+        }
+        
+        return $builder;
+    }
+
+    /**
+     * @param $username
+     * @return mixed
+     */
+    protected function by($username)
+    {
         $user = User::where('name', $username)->firstOrFail();
-        return $builder->where('user_id', $user->id);
+        return $this->builder->where('user_id', $user->id);
     }
 }
