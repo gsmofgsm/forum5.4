@@ -6,27 +6,8 @@ namespace App\Filters;
 use App\User;
 use Illuminate\Http\Request;
 
-class ThreadFilters
+class ThreadFilters extends Filters
 {
-
-    protected $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
-
-    public function apply($builder)
-    {
-        $this->builder = $builder;
-
-        // We apply our filters to the builder
-        if($this->request->has('by')){
-            $this->by($this->request->by);
-        }
-        
-        return $builder;
-    }
 
     /**
      * @param $username
