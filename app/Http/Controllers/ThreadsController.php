@@ -127,7 +127,6 @@ class ThreadsController extends Controller
 
         $threads = $threads->filter($filters);
 
-        dd($threads->toSql());
         return $threads->get();
     }
 }
