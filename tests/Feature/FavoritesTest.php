@@ -30,4 +30,19 @@ class FavoritesTest extends TestCase
         // It should be recorded in the database
         $this->assertCount(1, $reply->favorites);
     }
+
+    /** @test */
+    public function an_authenticated_user_may_only_favorite_a_reply_once()
+    {
+        $reply = create('App\Reply');
+
+        // If I post to a "favorite" endpoint
+        $this->signIn();
+        $this->post('/replies/' . $reply->id . '/favorites');
+        // twice
+        $this->post('/replies/' . $reply->id . '/favorites');
+
+        // It should be recorded in the database only once
+        $this->assertCount(1, $reply->favorites);
+    }
 }
