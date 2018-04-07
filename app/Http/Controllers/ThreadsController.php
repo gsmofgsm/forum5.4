@@ -122,7 +122,7 @@ class ThreadsController extends Controller
         if ($channel->exists) {
             $threads = $channel->threads()->latest();
         } else {
-            $threads = Thread::with('channel')->latest();
+            $threads = Thread::latest();
         }
 
         $threads = $threads->filter($filters);
