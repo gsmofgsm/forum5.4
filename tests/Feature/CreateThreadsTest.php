@@ -76,10 +76,10 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_can_be_deleted()
+    public function authorised_user_can_delete_a_thread()
     {
         $this->signIn();
-        $thread = create('App\Thread');
+        $thread = create('App\Thread', ['user_id'=>auth()->id()]);
         $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
         $response = $this->json('DELETE', $thread->path());
@@ -90,9 +90,12 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function threads_may_only_be_deleted_by_those_who_have_permision()
+    public function unauthorised_user_can_not_delete_a_thread()
     {
+        $this->signIn();
+        $thread = create('App\Thread');
 
+        $this->withExceptionHandling()->delete($thread->path())->assertStatus(403);
     }
 
     protected function publishThread($overrides = [])
