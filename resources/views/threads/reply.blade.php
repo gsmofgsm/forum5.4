@@ -12,7 +12,10 @@
             <div>
                 <form method="POST" action="/replies/{{ $reply->id }}/favorites">
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-default">Favorite</button>
+                    <button type="submit" class="btn btn-default">
+                        {{ $reply->favorites()->count() }}
+                        {{ str_plural('Favorite', $reply->favorites()->count()) }}
+                    </button>
                 </form>
             </div>
         </div>
