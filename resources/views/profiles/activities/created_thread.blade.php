@@ -1,15 +1,10 @@
-<div class="card">
-    <div class="card-header">
-        <div class="level">
-            <span class="flex">
-                {{ $profileUser->name }} published
-                <a href="{{ $activity->subject->path() }}">{{ $activity->subject->title }}</a>
-            </span>
-            {{--                            <span>{{ $thread->created_at->diffForHumans() }}</span>--}}
-        </div>
-    </div>
+@component('profiles.activities.activity')
+    @slot('heading')
+        {{ $profileUser->name }} published
+        <a href="{{ $activity->subject->path() }}">{{ $activity->subject->title }}</a>
+    @endslot
 
-    <div class="card-body">
+    @slot('body')
         {{ $activity->subject->body }}
-    </div>
-</div>
+    @endslot
+@endcomponent
