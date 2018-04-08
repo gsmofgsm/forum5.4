@@ -13,9 +13,16 @@ trait RecordActivity
 {
     protected static function bootRecordActivity()
     {
-        static::created(function ($thread) {
-            $thread->recordActivity('created');
-        });
+        foreach(static::getActivitiesToRecord() as $event ) {
+            static::$event(function ($model) use ($event) {
+                $model->recordActivity($event);
+            });
+        }
+    }
+
+    protected static function getActivitiesToRecord()
+    {
+        return ['created'];
     }
 
     protected function recordActivity($event)
