@@ -11,6 +11,12 @@ namespace App;
 
 trait RecordActivity
 {
+    protected static function bootRecordActivity()
+    {
+        static::created(function ($thread) {
+            $thread->recordActivity('created');
+        });
+    }
 
     protected function recordActivity($event)
     {
