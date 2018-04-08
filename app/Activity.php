@@ -8,6 +8,18 @@ class Activity extends Model
 {
     protected $guarded = [];
 
+    public static function feed(User $user, $take = 50)
+    {
+        return $user->activities()
+            ->latest()
+            ->with('subject')
+            ->take($take)
+            ->get()
+            ->groupBy(function($activity){
+                return $activity->created_at->format('Y-m-d');
+            });
+    }
+
     public function subject()
     {
         return $this->morphTo();
