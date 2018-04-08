@@ -20,6 +20,15 @@ class Thread extends Model
         static::deleting(function($thread){
             $thread->replies()->delete();
         });
+
+        static::created(function ($thread) {
+            Activity::create([
+                'type' => 'created_thread',
+                'user_id' => $thread->user_id,
+                'subject_id' => $thread->id,
+                'subject_type' => 'App\Thread'
+            ]);
+        });
     }
 
     public function path()
