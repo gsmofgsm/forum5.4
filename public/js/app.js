@@ -47339,7 +47339,7 @@ var render = function() {
       directives: [
         { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
       ],
-      staticClass: "alert alert-warning alert-flash",
+      staticClass: "alert alert-success alert-flash",
       attrs: { role: "alert" }
     },
     [_c("strong", [_vm._v("Success!")]), _vm._v(" " + _vm._s(_vm.body) + "\n")]
