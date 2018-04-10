@@ -28,7 +28,7 @@ class RepliesController extends Controller
 
     public function update(Reply $reply)
     {
-        $reply->update(['body' => request('body')]);
+        $reply->update(request(['body']));
     }
 
     public function destroy(Reply $reply)
