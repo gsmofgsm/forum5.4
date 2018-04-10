@@ -53,10 +53,14 @@ class ParticipateInForumTest extends TestCase
     public function unauthorized_users_cannot_delete_replies()
     {
         $this->withExceptionHandling();
-        
+
         $reply = create('App\Reply');
 
         $this->delete("/replies/{$reply->id}")
             ->assertRedirect('/login');
+
+        $this->signIn()
+            ->delete("/replies/{$reply->id}")
+            ->assertStatus(403);
     }
 }
