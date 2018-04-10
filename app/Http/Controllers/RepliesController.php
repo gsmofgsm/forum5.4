@@ -28,9 +28,7 @@ class RepliesController extends Controller
 
     public function destroy(Reply $reply)
     {
-        if($reply->user_id != auth()->id()){
-            return response([], 403);
-        }
+        $this->authorize('update', $reply);
 
         $reply->delete();
 
