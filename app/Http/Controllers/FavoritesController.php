@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Favorite;
+use App\RecordActivity;
 use App\Reply;
 use Illuminate\Http\Request;
 
