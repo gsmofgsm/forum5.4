@@ -1,3 +1,5 @@
+<reply :attributes="{{ $reply }}" inline-template>
+
 <div class="card" id="reply-{{ $reply->id }}">
     <div class="card-header">
         <div class="level">
@@ -21,11 +23,21 @@
         </div>
     </div>
     <div class="card-body">
-        {{ $reply->body }}
+        <div v-if="editing">
+            <div class="form-group">
+                <textarea name="" id="" class="form-control" v-model="body"></textarea>
+            </div>
+            <button class="btn btn-xs btn-primary" @click="update">Update</button>
+            <button class="btn btn-xs btn-link" @click="editing = false">Cancel</button>
+        </div>
+        <div v-else>
+            {{ $reply->body }}
+        </div>
     </div>
 
     @can('update', $reply)
-    <div class="card-footer">
+    <div class="card-footer level">
+        <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
         <form method="POST" action="/replies/{{ $reply->id }}">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
@@ -34,3 +46,5 @@
     </div>
     @endcan
 </div>
+
+</reply>
