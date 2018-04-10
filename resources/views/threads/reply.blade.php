@@ -30,9 +30,7 @@
             <button class="btn btn-xs btn-primary" @click="update">Update</button>
             <button class="btn btn-xs btn-link" @click="editing = false">Cancel</button>
         </div>
-        <div v-else>
-            {{ $reply->body }}
-        </div>
+        <div v-else v-text="body"></div>
     </div>
 
     @can('update', $reply)

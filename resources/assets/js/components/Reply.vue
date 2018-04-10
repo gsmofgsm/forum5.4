@@ -11,9 +11,11 @@
 
         methods: {
             update() {
-                axios.patch('/replies' + this.attributes.id, {
+                axios.patch('/replies/' + this.attributes.id, {
                     body: this.body
-                })
+                });
+
+                this.editing = false;
             }
         }
     }
