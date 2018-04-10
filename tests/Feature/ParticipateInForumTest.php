@@ -75,6 +75,21 @@ class ParticipateInForumTest extends TestCase
     }
 
     /** @test */
+    public function unauthorized_users_cannot_update_replies()
+    {
+        $this->withExceptionHandling();
+
+        $reply = create('App\Reply');
+
+        $this->patch("/replies/{$reply->id}")
+            ->assertRedirect('/login');
+
+        $this->signIn()
+            ->patch("/replies/{$reply->id}")
+            ->assertStatus(403);
+    }
+
+    /** @test */
     public function authorized_users_can_update_replies()
     {
         $this->signIn();
