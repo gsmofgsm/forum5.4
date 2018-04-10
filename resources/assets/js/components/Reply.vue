@@ -16,6 +16,8 @@
                 });
 
                 this.editing = false;
+
+                flash('Updated!');
             }
         }
     }
