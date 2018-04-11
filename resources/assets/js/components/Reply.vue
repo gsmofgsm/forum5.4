@@ -1,20 +1,18 @@
 <template>
-    <div class="card" id="reply-{{ $reply->id }}">
+    <div class="card" :id="'reply-'+id">
         <div class="card-header">
             <div class="level">
                 <h5 class="flex">
-                    <a href="{{ route('profile', $reply->owner) }}">
-                        {{ $reply->owner->name }}
-                    </a>
+                    <a :href="'/profiles/'+attributes.owner.name" v-text="attributes.owner.name"></a>
                     said
-                    {{ $reply->created_at->diffForHumans() }}
+                    {{ attributes.created_at }}
                     ...
                 </h5>
-                @if(auth()->check())
-                <div>
-                    <favorite :reply="{{ $reply }}"></favorite>
-                </div>
-                @endif
+                <!--@if(auth()->check())-->
+                <!--<div>-->
+                    <!--<favorite :reply="{{ $reply }}"></favorite>-->
+                <!--</div>-->
+                <!--@endif-->
             </div>
         </div>
         <div class="card-body">
@@ -28,17 +26,12 @@
             <div v-else v-text="body"></div>
         </div>
 
-        @can('update', $reply)
+        <!--@can('update', $reply)-->
         <div class="card-footer level">
             <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
-            {{--<form method="POST" action="/replies/{{ $reply->id }}">--}}
-            {{--{{ csrf_field() }}--}}
-            {{--{{ method_field('DELETE') }}--}}
-            {{--<button type="submit" class="btn btn-danger btn-xs">Delete</button>--}}
-            {{--</form>--}}
         </div>
-        @endcan
+        <!--@endcan-->
     </div>
 
 </template>
@@ -54,7 +47,8 @@
         data() {
             return {
                 editing: false,
-                body: this.attributes.body
+                body: this.attributes.body,
+                id: this.attributes.id
             };
         },
 
