@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <thread-view inline-template>
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -28,9 +29,10 @@
                     </div>
                 </div>
 
-                @foreach($replies as $reply)
-                    @include ( 'threads.reply' )
-                @endforeach
+                <replies :data="{{ $thread->replies }}"></replies>
+                {{--@foreach($replies as $reply)--}}
+                    {{--@include ( 'threads.reply' )--}}
+                {{--@endforeach--}}
 
                 {{ $replies->links() }}
 
@@ -57,4 +59,5 @@
             </div>
         </div>
     </div>
+    </thread-view>
 @endsection
