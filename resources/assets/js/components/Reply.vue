@@ -8,11 +8,10 @@
                     {{ attributes.created_at }}
                     ...
                 </h5>
-                <!--@if(auth()->check())-->
-                <!--<div>-->
-                    <!--<favorite :reply="{{ $reply }}"></favorite>-->
-                <!--</div>-->
-                <!--@endif-->
+
+                <div v-if="signedIn">
+                    <favorite :reply="attributes"></favorite>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -50,6 +49,10 @@
                 body: this.attributes.body,
                 id: this.attributes.id
             };
+        },
+
+        computed: {
+            signedIn: window.App.signedIn
         },
 
         methods: {
