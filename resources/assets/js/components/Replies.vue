@@ -23,7 +23,8 @@
         methods: {
             remove(index) {
                 this.items.splice(index, 1);
-                flash('Reply was deleted.')
+                this.$emit('removed');
+                flash('Reply was deleted.');
             }
         }
     }

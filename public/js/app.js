@@ -48110,6 +48110,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['initialRepliesCount'],
+
+    data: function data() {
+        return {
+            repliesCount: this.initialRepliesCount
+        };
+    },
+
+
     components: { Replies: __WEBPACK_IMPORTED_MODULE_0__components_Replies_vue___default.a }
 });
 
@@ -48214,6 +48223,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         remove: function remove(index) {
             this.items.splice(index, 1);
+            this.$emit('removed');
             flash('Reply was deleted.');
         }
     }
