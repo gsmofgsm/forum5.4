@@ -47825,7 +47825,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47905,8 +47905,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         destroy: function destroy() {
             axios.delete('/replies/' + this.attributes.id);
-            $(this.$el).fadeOut(300);
-            flash('Your reply has been deleted!');
+
+            this.$emit('deleted', this.attributes.id);
+            // $(this.$el).fadeOut(300);
+            // flash('Your reply has been deleted!');
         }
     }
 });
@@ -48206,6 +48208,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             items: this.data
         };
+    },
+
+
+    methods: {
+        remove: function remove(index) {
+            this.items.splice(index, 1);
+            flash('Reply was deleted.');
+        }
     }
 });
 
@@ -48219,8 +48229,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.items, function(reply) {
-      return _c("div", [_c("reply", { attrs: { attributes: reply } })], 1)
+    _vm._l(_vm.items, function(reply, index) {
+      return _c(
+        "div",
+        [
+          _c("reply", {
+            attrs: { attributes: reply },
+            on: {
+              deleted: function($event) {
+                _vm.remove(index)
+              }
+            }
+          })
+        ],
+        1
+      )
     })
   )
 }
