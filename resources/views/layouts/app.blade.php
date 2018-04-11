@@ -22,7 +22,8 @@
 
     <script>
         window.App = {!! json_encode([
-            'signedIn' => auth()->check()
+            'signedIn' => auth()->check(),
+            'user' => auth()->user()
         ]) !!};
     </script>
 

@@ -26,7 +26,7 @@
         </div>
 
         <!--@can('update', $reply)-->
-        <div class="card-footer level">
+        <div class="card-footer level" v-if="canUpdate">
             <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
         </div>
@@ -52,7 +52,12 @@
         },
 
         computed: {
-            signedIn: window.App.signedIn
+            signedIn() {
+                return window.App.signedIn;
+            },
+            canUpdate() {
+                return this.attributes.user_id == window.App.user.id;
+            }
         },
 
         methods: {
