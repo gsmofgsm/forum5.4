@@ -47948,7 +47948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             favoritesCount: this.reply.favoritesCount,
-            isFavorited: false
+            isFavorited: this.reply.isFavorited
         };
     },
 
@@ -47963,6 +47963,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         toggle: function toggle() {
             if (this.isFavorited) {
                 axios.delete('/replies/' + this.reply.id + '/favorites');
+                this.isFavorited = false;
+                this.favoritesCount--;
             } else {
                 axios.post('/replies/' + this.reply.id + '/favorites');
                 this.isFavorited = true;
