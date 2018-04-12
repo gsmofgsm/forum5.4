@@ -5,7 +5,7 @@
                 <h5 class="flex">
                     <a :href="'/profiles/'+attributes.owner.name" v-text="attributes.owner.name"></a>
                     said
-                    {{ attributes.created_at }}
+                    <span v-text="ago"></span>
                     ...
                 </h5>
 
@@ -37,6 +37,7 @@
 
 <script>
     import Favorite from './Favorite.vue';
+    import moment from 'moment';
 
     export default {
         props: ['attributes'],
@@ -58,6 +59,9 @@
             canUpdate() {
                 return this.authorize(user => this.attributes.user_id == user.id);
                 // return this.attributes.user_id == window.App.user.id;
+            },
+            ago() {
+                return moment(this.attributes.created_at).fromNow() + '...';
             }
         },
 
