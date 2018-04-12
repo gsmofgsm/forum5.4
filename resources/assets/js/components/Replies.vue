@@ -13,14 +13,17 @@
     import NewReply from './NewReply.vue';
 
     export default {
-        props: ['data'],
-
         components: { Reply, NewReply },
 
         data() {
             return {
-                items: this.data
+                dataSet: false,
+                items: []
             }
+        },
+
+        created() {
+            this.fetch();
         },
 
         computed: {
@@ -39,6 +42,20 @@
                 this.items.splice(index, 1);
                 this.$emit('removed');
                 flash('Reply was deleted.');
+            },
+
+            fetch() {
+                axios.get(this.url())
+                    .then(this.refresh);
+            },
+
+            url() {
+                return location.pathname + '/replies';
+            },
+
+            refresh({data}) {
+                this.dataSet = data;
+                this.items = data.data;
             }
         }
     }

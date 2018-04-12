@@ -48239,14 +48239,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['data'],
-
     components: { Reply: __WEBPACK_IMPORTED_MODULE_0__Reply_vue___default.a, NewReply: __WEBPACK_IMPORTED_MODULE_1__NewReply_vue___default.a },
 
     data: function data() {
         return {
-            items: this.data
+            dataSet: false,
+            items: []
         };
+    },
+    created: function created() {
+        this.fetch();
     },
 
 
@@ -48265,6 +48267,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.items.splice(index, 1);
             this.$emit('removed');
             flash('Reply was deleted.');
+        },
+        fetch: function fetch() {
+            axios.get(this.url()).then(this.refresh);
+        },
+        url: function url() {
+            return location.pathname + '/replies';
+        },
+        refresh: function refresh(_ref) {
+            var data = _ref.data;
+
+            this.dataSet = data;
+            this.items = data.data;
         }
     }
 });
