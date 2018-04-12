@@ -48244,6 +48244,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
+    computed: {
+        endpoint: function endpoint() {
+            return '/threads/necessitatibus/15/replies';
+        }
+    },
+
     methods: {
         add: function add(reply) {
             this.items.push(reply);
@@ -48285,7 +48291,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("new-reply", {
-        attrs: { endpoint: "/threads/necessitatibus/15/replies" },
+        attrs: { endpoint: _vm.endpoint },
         on: { created: _vm.add }
       })
     ],

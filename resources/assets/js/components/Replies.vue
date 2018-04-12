@@ -4,7 +4,7 @@
             <reply :attributes="reply" @deleted="remove(index)"></reply>
         </div>
 
-        <new-reply :endpoint="'/threads/necessitatibus/15/replies'" @created="add"></new-reply>
+        <new-reply :endpoint="endpoint" @created="add"></new-reply>
     </div>
 </template>
 
@@ -20,6 +20,12 @@
         data() {
             return {
                 items: this.data
+            }
+        },
+
+        computed: {
+            endpoint() {
+                return '/threads/necessitatibus/15/replies';
             }
         },
 
