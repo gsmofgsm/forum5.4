@@ -48278,6 +48278,7 @@ var render = function() {
           "div",
           [
             _c("reply", {
+              key: reply.id,
               attrs: { attributes: reply },
               on: {
                 deleted: function($event) {
