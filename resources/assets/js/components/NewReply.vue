@@ -1,8 +1,5 @@
 <template>
-    <!--@if(auth()->check())-->
-    <!--<form method="POST" action="{{ $thread->path() . '/replies' }}">-->
-        <!--{{ csrf_field() }}-->
-    <div class="form-group">
+    <div class="form-group" v-if="signedIn">
         <textarea name="body"
                   id="body"
                   class="form-control"
@@ -14,10 +11,9 @@
                 class="btn btn-default"
                 @click="addReply">Post</button>
     </div>
-    <!--</form>-->
-    <!--@else-->
-    <!--<p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.</p>-->
-    <!--@endif-->
+    <p class="text-center" v-else>
+        Please <a href="/login">Sign in</a> to participate in this discussion.
+    </p>
 </template>
 
 <script>
@@ -26,6 +22,12 @@
             return {
                 body: '',
                 endpoint: '/threads/necessitatibus/15/replies'
+            }
+        },
+
+        computed: {
+            signedIn() {
+                return window.App.signedIn;
             }
         },
 

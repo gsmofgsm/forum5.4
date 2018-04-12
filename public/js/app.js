@@ -48488,10 +48488,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -48501,6 +48497,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+
+    computed: {
+        signedIn: function signedIn() {
+            return window.App.signedIn;
+        }
+    },
 
     methods: {
         addReply: function addReply() {
@@ -48523,45 +48525,51 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group" }, [
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.body,
-          expression: "body"
-        }
-      ],
-      staticClass: "form-control",
-      attrs: {
-        name: "body",
-        id: "body",
-        placeholder: "Have something to say?",
-        rows: "5",
-        required: ""
-      },
-      domProps: { value: _vm.body },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _vm.signedIn
+    ? _c("div", { staticClass: "form-group" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.body,
+              expression: "body"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            name: "body",
+            id: "body",
+            placeholder: "Have something to say?",
+            rows: "5",
+            required: ""
+          },
+          domProps: { value: _vm.body },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.body = $event.target.value
+            }
           }
-          _vm.body = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-default",
-        attrs: { type: "button" },
-        on: { click: _vm.addReply }
-      },
-      [_vm._v("Post")]
-    )
-  ])
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: { type: "button" },
+            on: { click: _vm.addReply }
+          },
+          [_vm._v("Post")]
+        )
+      ])
+    : _c("p", { staticClass: "text-center" }, [
+        _vm._v("\n    Please "),
+        _c("a", { attrs: { href: "/login" } }, [_vm._v("Sign in")]),
+        _vm._v(" to participate in this discussion.\n")
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true
