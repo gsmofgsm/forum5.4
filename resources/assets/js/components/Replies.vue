@@ -25,7 +25,7 @@
 
         computed: {
             endpoint() {
-                return '/threads/necessitatibus/15/replies';
+                return location.pathname + '/replies';
             }
         },
 

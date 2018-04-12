@@ -48246,7 +48246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         endpoint: function endpoint() {
-            return '/threads/necessitatibus/15/replies';
+            return location.pathname + '/replies';
         }
     },
 
