@@ -48284,7 +48284,10 @@ var render = function() {
         )
       }),
       _vm._v(" "),
-      _c("new-reply", { on: { created: _vm.add } })
+      _c("new-reply", {
+        attrs: { endpoint: "/threads/necessitatibus/15/replies" },
+        on: { created: _vm.add }
+      })
     ],
     2
   )
@@ -48490,10 +48493,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['endpoint'],
+
     data: function data() {
         return {
-            body: '',
-            endpoint: '/threads/necessitatibus/15/replies'
+            body: ''
         };
     },
 

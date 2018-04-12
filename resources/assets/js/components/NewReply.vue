@@ -18,10 +18,11 @@
 
 <script>
     export default {
+        props: ['endpoint'],
+        
         data(){
             return {
-                body: '',
-                endpoint: '/threads/necessitatibus/15/replies'
+                body: ''
             }
         },
 
