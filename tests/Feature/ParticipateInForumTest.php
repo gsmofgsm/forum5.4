@@ -34,6 +34,7 @@ class ParticipateInForumTest extends TestCase
 
         // Then their reply should be visible on the page
         $this->assertDatabaseHas('replies', ['body' => $reply->body]);
+        $this->assertEquals(1, $thread->fresh()->replies_count);
     }
 
     /** @test */
@@ -71,6 +72,7 @@ class ParticipateInForumTest extends TestCase
 
         $this->delete("/replies/{$reply->id}")->assertStatus(302);
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+        $this->assertEquals(0, $reply->thread->fresh()->replies_count);
     }
 
     /** @test */
