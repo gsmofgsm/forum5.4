@@ -65358,7 +65358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.nextUrl = this.dataSet.next_page_url;
         },
         page: function page() {
-            this.broadcast();
+            this.broadcast().updateUrl();
         }
     },
 
@@ -65371,6 +65371,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         broadcast: function broadcast() {
             this.$emit('updated', this.page);
+
+            return this;
+        },
+        updateUrl: function updateUrl() {
+            history.pushState(null, null, '?page=' + this.page);
         }
     }
 });
