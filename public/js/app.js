@@ -65349,12 +65349,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.page = this.dataSet.current_page;
             this.prevUrl = this.dataSet.prev_page_url;
             this.nextUrl = this.dataSet.next_page_url;
+        },
+        page: function page() {
+            this.broadcast();
         }
     },
 
     computed: {
         shouldPaginate: function shouldPaginate() {
             return !!this.prevUrl || !!this.nextUrl;
+        },
+        broadcast: function broadcast() {
+            this.$emit('updated', this.page);
         }
     }
 });
@@ -65388,6 +65394,7 @@ var render = function() {
                 attrs: { href: "#", "aria-label": "Previous", rel: "prev" },
                 on: {
                   click: function($event) {
+                    $event.preventDefault()
                     _vm.page--
                   }
                 }
@@ -65420,6 +65427,7 @@ var render = function() {
                 attrs: { href: "#", "aria-label": "Next", rel: "next" },
                 on: {
                   click: function($event) {
+                    $event.preventDefault()
                     _vm.page++
                   }
                 }
