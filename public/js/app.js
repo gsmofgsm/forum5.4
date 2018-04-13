@@ -48270,9 +48270,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetch: function fetch(page) {
             axios.get(this.url(page)).then(this.refresh);
         },
-        url: function url() {
-            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+        url: function url(page) {
+            if (!page) {
+                var query = location.search.match(/page=(\d+)/);
+                page = query ? query[1] : 1;
+            }
             return location.pathname + '/replies?page=' + page;
         },
         refresh: function refresh(_ref) {

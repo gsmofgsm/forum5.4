@@ -42,7 +42,11 @@
                     .then(this.refresh);
             },
 
-            url(page=1) {
+            url(page) {
+                if(! page){
+                    let query = location.search.match(/page=(\d+)/);
+                    page = query ? query[1] : 1;
+                }
                 return location.pathname + '/replies?page=' + page;
             },
 
