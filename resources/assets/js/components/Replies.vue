@@ -4,6 +4,8 @@
             <reply :attributes="reply" @deleted="remove(index)" :key="reply.id"></reply>
         </div>
 
+        <paginator :dataSet="dataSet"></paginator>
+
         <new-reply :endpoint="endpoint" @created="add"></new-reply>
     </div>
 </template>
