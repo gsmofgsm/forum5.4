@@ -48267,11 +48267,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        fetch: function fetch() {
-            axios.get(this.url()).then(this.refresh);
+        fetch: function fetch(page) {
+            axios.get(this.url(page)).then(this.refresh);
         },
         url: function url() {
-            return location.pathname + '/replies';
+            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            return location.pathname + '/replies?page=' + page;
         },
         refresh: function refresh(_ref) {
             var data = _ref.data;
@@ -48311,7 +48313,10 @@ var render = function() {
         )
       }),
       _vm._v(" "),
-      _c("paginator", { attrs: { dataSet: _vm.dataSet } }),
+      _c("paginator", {
+        attrs: { dataSet: _vm.dataSet },
+        on: { updated: _vm.fetch }
+      }),
       _vm._v(" "),
       _c("new-reply", {
         attrs: { endpoint: _vm.endpoint },
@@ -65358,7 +65363,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         shouldPaginate: function shouldPaginate() {
             return !!this.prevUrl || !!this.nextUrl;
-        },
+        }
+    },
+
+    methods: {
         broadcast: function broadcast() {
             this.$emit('updated', this.page);
         }
