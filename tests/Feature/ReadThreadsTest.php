@@ -33,20 +33,6 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_replies_that_are_associated_with_a_thread()
-    {
-        // Given we have a thread
-        // And that thread includes replies
-        $reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
-
-        // When we visit a thread page
-        $response = $this->get($this->thread->path());
-
-        // Then we should see the replies
-        $response->assertSee($reply->body);
-    }
-
-    /** @test */
     public function a_user_can_filter_threads_according_to_a_channel()
     {
         $channel = create('App\Channel');
