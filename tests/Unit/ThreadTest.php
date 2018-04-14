@@ -71,15 +71,12 @@ class ThreadTest extends TestCase
     {
         // Given we have a thread
 
-        // And a authenticated user
-        $this->signIn();
-
         // When the user subscribes to the thread
-        $this->thread->subscribe();
+        $this->thread->subscribe($userId = 1);
 
         // Then we should be able to fetch all threads that the user has subscribed to
         $this->assertEquals(
-            1, $this->thread->subscriptions()->where('user_id', auth()->id())->count()
+            1, $this->thread->subscriptions()->where('user_id', $userId)->count()
         );
     }
 }
