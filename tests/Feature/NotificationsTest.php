@@ -56,13 +56,14 @@ class NotificationsTest extends TestCase
             'user_id' => create('App\User')->id,
             'body' => 'Some reply here'
         ]);
-        $this->assertCount(1, auth()->user()->unreadNotifications);
-        $notificationId = auth()->user()->unreadNotifications->first()->id;
 
-        $username = auth()->user()->name;
-        $this->delete("/profiles/{$username}/notifications/{$notificationId}");
+        $user = auth()->user();
+        $this->assertCount(1, $user->unreadNotifications);
+        $notificationId = $user->unreadNotifications->first()->id;
+
+        $this->delete("/profiles/{$user->name}/notifications/{$notificationId}");
 
         // A notification should be prepared for the user.
-        $this->assertCount(0, auth()->user()->fresh()->unreadNotifications);
+        $this->assertCount(0, $user->fresh()->unreadNotifications);
     }
 }
