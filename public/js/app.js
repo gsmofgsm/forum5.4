@@ -65542,7 +65542,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         subscribe: function subscribe() {
-            axios.post(location.pathname + '/subscriptions');
+            var action = this.active ? 'delete' : 'post';
+            axios[action](location.pathname + '/subscriptions');
 
             flash('Subscribed');
         }
