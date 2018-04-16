@@ -42,7 +42,7 @@
                         </p>
 
                         <p>
-                            <subscribe-button :active="true"></subscribe-button>
+                            <subscribe-button :active="{{ json_encode($thread->isSubscribed) }}"></subscribe-button>
                         </p>
                     </div>
                 </div>

@@ -17,8 +17,7 @@
             subscribe() {
                 let action = this.active ? 'delete' : 'post';
                 axios[action](location.pathname + '/subscriptions');
-
-                flash('Subscribed');
+                this.active = ! this.active;
             }
         }
     }

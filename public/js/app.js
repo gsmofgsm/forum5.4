@@ -65544,8 +65544,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         subscribe: function subscribe() {
             var action = this.active ? 'delete' : 'post';
             axios[action](location.pathname + '/subscriptions');
-
-            flash('Subscribed');
+            this.active = !this.active;
         }
     }
 });
