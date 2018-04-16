@@ -65532,6 +65532,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['active'],
+
+    computed: {
+        classes: function classes() {
+            return 'btn ' + (this.active ? 'btn-primary' : 'btn-default');
+        }
+    },
+
     methods: {
         subscribe: function subscribe() {
             axios.post(location.pathname + '/subscriptions');
@@ -65549,11 +65557,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "button",
-    { staticClass: "btn btn-default", on: { click: _vm.subscribe } },
-    [_vm._v("Subscribe")]
-  )
+  return _c("button", { class: _vm.classes, on: { click: _vm.subscribe } }, [
+    _vm._v("Subscribe")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
