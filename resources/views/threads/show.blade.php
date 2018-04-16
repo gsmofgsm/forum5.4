@@ -40,6 +40,10 @@
                             <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>, and currently
                             has <span v-text="repliesCount"></span> comments.
                         </p>
+
+                        <p>
+                            <subscribe-button></subscribe-button>
+                        </p>
                     </div>
                 </div>
             </div>
