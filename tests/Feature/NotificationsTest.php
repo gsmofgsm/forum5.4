@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Notifications\DatabaseNotification;
 use Tests\TestCase;
 
 class NotificationsTest extends TestCase
@@ -53,30 +54,18 @@ class NotificationsTest extends TestCase
     /** @test */
     public function a_user_can_fetch_their_unread_notifications()
     {
-        $thread = create('App\Thread')->subscribe();
+        create(DatabaseNotification::class);
 
-        $thread->addReply([
-            'user_id' => create('App\User')->id,
-            'body' => 'Some reply here'
-        ]);
-
-        $user = auth()->user();
-
-        $response = $this->getJson("/profiles/{$user->name}/notifications")->json();
-
-        $this->assertCount(1, $response);
+        $this->assertCount(
+            1,
+            $this->getJson("/profiles/" . auth()->user()->name . "/notifications")->json()
+        );
     }
 
     /** @test */
     public function a_user_can_mark_a_notification_as_read()
     {
-        $thread = create('App\Thread')->subscribe();
-
-        // Then, each time a new reply is left...
-        $thread->addReply([
-            'user_id' => create('App\User')->id,
-            'body' => 'Some reply here'
-        ]);
+        create(DatabaseNotification::class);
 
         $user = auth()->user();
         $this->assertCount(1, $user->unreadNotifications);
