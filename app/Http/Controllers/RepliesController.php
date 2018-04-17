@@ -23,6 +23,11 @@ class RepliesController extends Controller
         $this->validate(request(), [
            'body' => 'required'
         ]);
+
+        if(stripos(request('body'), 'Yahoo Customer Support') !== false){
+            throw new \Exception('Your reply contains spam.');
+        }
+
         $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
