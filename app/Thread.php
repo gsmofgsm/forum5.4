@@ -98,4 +98,13 @@ class Thread extends Model
             ->where('user_id', '!=', $reply->user_id)
             ->each->notify($reply);
     }
+
+    public function hasUpdatesFor(User $user)
+    {
+        // Look in the cache for the proper key.
+        $key = $user->readThreadCacheKey($this);
+
+        // compare that carbon instance with the $thread->updated_at
+        return $this->updated_at > cache($key);
+    }
 }
