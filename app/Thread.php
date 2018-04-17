@@ -91,4 +91,11 @@ class Thread extends Model
     {
         return $this->hasMany(ThreadSubscription::class);
     }
+
+    public function notifySubscriber($reply)
+    {
+        $this->subscriptions
+            ->where('user_id', '!=', $reply->user_id)
+            ->each->notify($reply);
+    }
 }
