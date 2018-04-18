@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reply;
-use App\Spam;
+use App\Inspections\Spam;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -39,9 +39,11 @@ class RepliesController extends Controller
         return back()->with('flash', 'Your reply is left!');
     }
 
-    public function update(Reply $reply)
+    public function update(Reply $reply, Spam $spam)
     {
         $this->authorize('update', $reply);
+
+        $spam->detect(request('body'));
 
         $reply->update(request(['body']));
     }
