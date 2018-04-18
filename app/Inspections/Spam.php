@@ -4,34 +4,17 @@ namespace App\Inspections;
 
 class Spam
 {
+    protected $inspections = [
+        InvalidKeywords::class,
+        KeyHeldDown::class
+    ];
+
     public function detect($body)
     {
-        // Detect invalid keywords.
-
-        $this->detectInvalidKeywords($body);
-        $this->detectKeyHeldDown($body);
+        foreach($this->inspections as $inspection){
+            app($inspection)->detect($body);
+        }
 
         return false;
-    }
-
-    protected function detectInvalidKeywords($body)
-    {
-        $invalidKeywords = [
-            'Yahoo customer support'
-        ];
-
-        foreach($invalidKeywords as $keyword){
-
-            if(stripos($body, $keyword) !== false){
-                throw new \Exception('Your reply contains spam.');
-            }
-        }
-    }
-
-    protected function detectKeyHeldDown($body)
-    {
-        if(preg_match('/(.)\\1{4,}/', $body)){
-            throw new \Exception('Your reply contains spam.');
-        }
     }
 }
