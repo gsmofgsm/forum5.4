@@ -69,11 +69,17 @@
             update() {
                 axios.patch('/replies/' + this.attributes.id, {
                     body: this.body
+                })
+                .then(() => {
+
+                    this.editing = false;
+
+                    flash('Updated!');
+
+                })
+                .catch(error => {
+                    flash(error.response.data, 'danger');
                 });
-
-                this.editing = false;
-
-                flash('Updated!');
             },
 
             destroy() {
