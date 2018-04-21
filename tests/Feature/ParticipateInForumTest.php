@@ -104,7 +104,7 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function replies_that_contains_spam_may_not_be_created()
     {
-        $this->signIn();
+        $this->withExceptionHandling()->signIn();
 
         $thread = create('App\Thread');
         $reply = make('App\Reply', [
