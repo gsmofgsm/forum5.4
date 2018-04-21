@@ -23,11 +23,7 @@ class RepliesController extends Controller
 
     public function store($channelId, Thread $thread, CreatePostForm $form)
     {
-        $reply = $thread->addReply([
-            'body' => request('body'),
-            'user_id' => auth()->id()
-        ]);
-        return $reply->load('owner');
+        return $form->persist($thread);
     }
 
     public function update(Reply $reply)

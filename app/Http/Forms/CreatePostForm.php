@@ -36,5 +36,11 @@ class CreatePostForm extends FormRequest
         throw new ThrottleException('You are replying too frequently. Please take a break.');
     }
 
-
+    public function persist($thread)
+    {
+        return $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id()
+        ])->load('owner');
+    }
 }
