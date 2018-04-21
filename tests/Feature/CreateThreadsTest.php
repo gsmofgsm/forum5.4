@@ -112,6 +112,6 @@ class CreateThreadsTest extends TestCase
 
         $thread = make('App\Thread', $overrides);
 
-        return $this->post('/threads', $thread->toArray());
+        return $this->json('post', '/threads', $thread->toArray());
     }
 }

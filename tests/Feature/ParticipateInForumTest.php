@@ -45,7 +45,7 @@ class ParticipateInForumTest extends TestCase
         $thread = factory('App\Thread')->create();
 
         $reply = factory('App\Reply')->make(['body' => null]);
-        $this->post($thread->path().'/replies', $reply->toArray())
+        $this->json('post', $thread->path().'/replies', $reply->toArray())
             ->assertStatus(422);
     }
 
@@ -111,7 +111,7 @@ class ParticipateInForumTest extends TestCase
             'body' => 'Yahoo Customer Support'
         ]);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json('post',$thread->path() . '/replies', $reply->toArray())
             ->assertStatus(422);
     }
 
@@ -124,10 +124,10 @@ class ParticipateInForumTest extends TestCase
             'body' => 'My simple reply.'
         ]);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json('post',$thread->path() . '/replies', $reply->toArray())
             ->assertStatus(201);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json('post',$thread->path() . '/replies', $reply->toArray())
             ->assertStatus(429);
     }
 }
