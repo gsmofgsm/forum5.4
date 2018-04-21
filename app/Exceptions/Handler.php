@@ -50,6 +50,9 @@ class Handler extends ExceptionHandler
         if($exception instanceof ValidationException){
             return response('Sorry, validation failed.', 422);
         }
+        if($exception instanceof ThrottleException){
+            return response('You are posting too frequently.', 429);
+        }
         return parent::render($request, $exception);
     }
 }

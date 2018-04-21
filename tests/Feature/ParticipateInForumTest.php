@@ -118,7 +118,7 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function users_may_only_reply_a_maximum_of_once_per_minute()
     {
-        $this->signIn();
+        $this->withExceptionHandling()->signIn();
         $thread = create('App\Thread');
         $reply = make('App\Reply', [
             'body' => 'My simple reply.'
@@ -128,6 +128,6 @@ class ParticipateInForumTest extends TestCase
             ->assertStatus(201);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
-            ->assertStatus(422);
+            ->assertStatus(429);
     }
 }
