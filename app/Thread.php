@@ -59,8 +59,6 @@ class Thread extends Model
 
         event(new ThreadReceivedNewReply($reply));
 
-        $this->notifySubscriber($reply);
-
         return $reply;
     }
 
@@ -93,13 +91,6 @@ class Thread extends Model
     public function subscriptions()
     {
         return $this->hasMany(ThreadSubscription::class);
-    }
-
-    public function notifySubscriber($reply)
-    {
-        $this->subscriptions
-            ->where('user_id', '!=', $reply->user_id)
-            ->each->notify($reply);
     }
 
     public function hasUpdatesFor(User $user)
