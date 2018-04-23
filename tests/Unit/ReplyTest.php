@@ -33,7 +33,7 @@ class ReplyTest extends TestCase
     /** @test */
     function it_wraps_mentioned_usernames_in_the_body_within_anchor_tags()
     {
-        $reply = create('App\Reply', [
+        $reply = new \App\Reply([
             'body' => 'Hello, @JaneDoe.'
         ]);
 
