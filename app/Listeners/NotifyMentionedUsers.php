@@ -27,7 +27,7 @@ class NotifyMentionedUsers
     public function handle(ThreadReceivedNewReply $event)
     {
         // Inspect the body of the reply for username mentions
-        preg_match_all('/\@([^\s\.]+)/', $event->reply->body, $matches);
+        preg_match_all('/\@([\w\-]+)/', $event->reply->body, $matches);
 
         $names = $matches[1];
         // And then for each mentioned user, notify them.
