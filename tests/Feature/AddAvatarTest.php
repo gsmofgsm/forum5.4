@@ -15,4 +15,13 @@ class AddAvatarTest extends TestCase
         $this->withExceptionHandling()->json('POST', 'api/users/1/avatar')
             ->assertStatus(401);
     }
+
+    /** @test */
+    function a_valid_avatar_must_be_provided()
+    {
+        $this->withExceptionHandling()->signIn();
+        $this->json('POST', 'api/users/' . auth()->id() . '/avatar', [
+            'avatar' => 'not-an-image'
+        ])->assertStatus(422);
+    }
 }
