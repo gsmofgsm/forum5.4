@@ -60,7 +60,7 @@ class ReadThreadsTest extends TestCase
         // When I filter all threads by popularity
         $response = $this->getJson('threads?popular=1')->json();
         // Then they should be returned from most replies to least.
-        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'replies_count'));
     }
 
     /** @test */
@@ -70,7 +70,7 @@ class ReadThreadsTest extends TestCase
         create('App\Reply', ['thread_id' => $threadWithReply->id]);
 
         $response = $this->getJson('threads?unanswered=1')->json();
-        $this->assertCount(1, $response);
+        $this->assertCount(1, $response['data']);
     }
 
     /** @test */

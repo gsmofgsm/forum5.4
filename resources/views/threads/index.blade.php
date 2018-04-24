@@ -9,6 +9,8 @@
 
                     <div class="card-body">
                         @include('threads._list')
+
+                        {{ $threads->render() }}
                     </div>
                 </div>
             </div>

@@ -143,6 +143,6 @@ class ThreadsController extends Controller
 
         $threads = $threads->filter($filters);
 
-        return $threads->get();
+        return $threads->paginate(5);
     }
 }
