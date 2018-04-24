@@ -17,6 +17,9 @@
 </template>
 
 <script>
+    import 'at.js';
+    import 'jquery.caret';
+
     export default {
         props: ['endpoint'],
 
@@ -30,6 +33,21 @@
             signedIn() {
                 return window.App.signedIn;
             }
+        },
+
+        mounted() {
+            $('#body').atwho({
+                at: "@",
+                delay: 750,
+                callbacks: {
+                    remoteFilter: function(query, callback) {
+                        console.log('called');
+                        $.getJSON("/api/users", {name: query}, function(usernames){
+                            callback(usernames)
+                        });
+                    }
+                }
+            });
         },
 
         methods: {
