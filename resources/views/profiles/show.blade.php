@@ -16,7 +16,7 @@
                 </form>
             @endcan
 
-            <img src="{{ asset( 'storage/' . $profileUser->avatar_path) }}" alt="profile_image" width="50" height="50">
+            <img src="{{ asset( 'storage/' . $profileUser->avatar()) }}" alt="profile_image" width="50" height="50">
 {{--            {{ $threads->links() }}--}}
         </div>
 
