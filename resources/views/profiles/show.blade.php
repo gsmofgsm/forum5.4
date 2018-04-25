@@ -8,6 +8,14 @@
                 <small>Since {{ $profileUser->created_at->diffForHumans() }}</small>
             </h1>
 
+            @can('update', $profileUser)
+                <form method="POST" action="{{ route('avatar', $profileUser) }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="file" name="avatar">
+                    <button type="submit" class="btn btn-primary">Add Avatar</button>
+                </form>
+            @endcan
+
 {{--            {{ $threads->links() }}--}}
         </div>
 
