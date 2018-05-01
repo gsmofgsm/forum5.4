@@ -67478,6 +67478,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -67528,7 +67529,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", { domProps: { textContent: _vm._s(_vm.user.name) } }),
+    _c("div", { staticClass: "level" }, [
+      _c("img", {
+        staticClass: "mr-1 mb-1",
+        attrs: {
+          src: _vm.avatar,
+          alt: "profile_image",
+          width: "50",
+          height: "50"
+        }
+      }),
+      _vm._v(" "),
+      _c("h1", { domProps: { textContent: _vm._s(_vm.user.name) } })
+    ]),
     _vm._v(" "),
     _vm.canUpdate
       ? _c(
@@ -67542,16 +67555,7 @@ var render = function() {
           ],
           1
         )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("img", {
-      attrs: {
-        src: _vm.avatar,
-        alt: "profile_image",
-        width: "50",
-        height: "50"
-      }
-    })
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
