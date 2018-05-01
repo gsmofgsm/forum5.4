@@ -1,5 +1,5 @@
 <template>
-    <input type="file" name="avatar" accept="image/*" @change="onChange">
+    <input type="file" accept="image/*" @change="onChange">
 </template>
 
 <script>

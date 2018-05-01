@@ -3,7 +3,7 @@
         <h1 v-text="user.name"></h1>
 
         <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-            <image-upload @loaded="onLoad"></image-upload>
+            <image-upload name="avatar" @loaded="onLoad"></image-upload>
         </form>
 
         <img :src="avatar" alt="profile_image" width="50" height="50">

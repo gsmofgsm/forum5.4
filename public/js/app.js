@@ -67534,7 +67534,12 @@ var render = function() {
       ? _c(
           "form",
           { attrs: { method: "POST", enctype: "multipart/form-data" } },
-          [_c("image-upload", { on: { loaded: _vm.onLoad } })],
+          [
+            _c("image-upload", {
+              attrs: { name: "avatar" },
+              on: { loaded: _vm.onLoad }
+            })
+          ],
           1
         )
       : _vm._e(),
@@ -67624,7 +67629,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("input", {
-    attrs: { type: "file", name: "avatar", accept: "image/*" },
+    attrs: { type: "file", accept: "image/*" },
     on: { change: _vm.onChange }
   })
 }
