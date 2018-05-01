@@ -4,7 +4,6 @@
 
         <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
             <input type="file" name="avatar" accept="image/*" @change="onChange">
-            <button type="submit" class="btn btn-primary">Add Avatar</button>
         </form>
 
         <img :src="avatar" alt="profile_image" width="50" height="50">

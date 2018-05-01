@@ -67476,7 +67476,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user'],
@@ -67545,13 +67544,7 @@ var render = function() {
             _c("input", {
               attrs: { type: "file", name: "avatar", accept: "image/*" },
               on: { change: _vm.onChange }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Add Avatar")]
-            )
+            })
           ]
         )
       : _vm._e(),
