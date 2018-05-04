@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redis;
 
 class Thread extends Model
 {
-    use RecordActivity;
+    use RecordActivity, RecordVisits;
 
     protected $guarded = [];
     protected $with = ['creator', 'channel'];
@@ -103,27 +103,5 @@ class Thread extends Model
         return $this->updated_at > cache($key);
     }
 
-    public function recordVisit()
-    {
-        Redis::incr($this->visitsKey());
-        return $this;
-    }
 
-    public function visits()
-    {
-        return Redis::get($this->visitsKey());
-    }
-
-    public function resetVisits()
-    {
-        Redis::del($this->visitsKey());
-    }
-
-    /**
-     * @return string
-     */
-    protected function visitsKey(): string
-    {
-        return "threads.{$this->id}.visits";
-    }
 }
