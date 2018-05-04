@@ -18,7 +18,7 @@
             <a href="{{ $thread->path() }}"><strong>{{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}</strong></a>
         </div>
         <div class="body">{{ $thread->body }}</div>
-        <div class="footer">{{ $thread->visits()->count() }} Visits</div>
+        <div class="footer">{{ $thread->visits }} Visits</div>
     </article>
     <hr>
 @endforeach

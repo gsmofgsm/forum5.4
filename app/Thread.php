@@ -102,9 +102,4 @@ class Thread extends Model
         // compare that carbon instance with the $thread->updated_at
         return $this->updated_at > cache($key);
     }
-
-    public function visits(): Visits
-    {
-        return new Visits($this);
-    }
 }
