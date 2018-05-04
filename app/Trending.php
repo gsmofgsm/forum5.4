@@ -29,6 +29,6 @@ class Trending
      */
     public function getKey(): string
     {
-        return 'trending_threads';
+        return app()->environment('testing') ? 'testing_trending_threads' : 'trending_threads';
     }
 }
