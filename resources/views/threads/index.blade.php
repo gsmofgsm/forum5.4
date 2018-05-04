@@ -15,6 +15,7 @@
                 </div>
             </div>
             <div class="col-md-4">
+                @if(count($trending))
                 <div class="card">
                     <div class="card-header">
                         Trending Threads
@@ -27,6 +28,7 @@
                         </ul>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
