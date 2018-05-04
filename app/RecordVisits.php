@@ -15,7 +15,7 @@ trait RecordVisits
 
     public function visits()
     {
-        return Redis::get($this->visitsKey());
+        return Redis::get($this->visitsKey()) ?? 0;
     }
 
     public function resetVisits()
