@@ -128,11 +128,11 @@ class ThreadTest extends TestCase
     {
         /** @var Thread $thread */
         $thread = make('App\Thread', ['id' => 1]);
-        $thread->resetVisits();
-        $this->assertSame(0, $thread->visits());
-        $thread->recordVisit();
-        $this->assertEquals(1, $thread->visits());
-        $thread->recordVisit();
-        $this->assertEquals(2, $thread->visits());
+        $thread->visits()->reset();
+        $this->assertSame(0, $thread->visits()->count());
+        $thread->visits()->record();
+        $this->assertEquals(1, $thread->visits()->count());
+        $thread->visits()->record();
+        $this->assertEquals(2, $thread->visits()->count());
     }
 }
