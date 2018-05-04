@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redis;
 
 class Thread extends Model
 {
-    use RecordActivity, RecordVisits;
+    use RecordActivity;
 
     protected $guarded = [];
     protected $with = ['creator', 'channel'];
@@ -103,5 +103,8 @@ class Thread extends Model
         return $this->updated_at > cache($key);
     }
 
-
+    public function visits(): Visits
+    {
+        return new Visits($this);
+    }
 }
