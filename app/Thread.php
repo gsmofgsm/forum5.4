@@ -6,6 +6,7 @@ use App\Events\ThreadHasNewReply;
 use App\Events\ThreadReceivedNewReply;
 use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 
 class Thread extends Model
 {
@@ -100,5 +101,29 @@ class Thread extends Model
 
         // compare that carbon instance with the $thread->updated_at
         return $this->updated_at > cache($key);
+    }
+
+    public function recordVisit()
+    {
+        Redis::incr($this->visitsKey());
+        return $this;
+    }
+
+    public function visits()
+    {
+        return Redis::get($this->visitsKey());
+    }
+
+    public function resetVisits()
+    {
+        Redis::del($this->visitsKey());
+    }
+
+    /**
+     * @return string
+     */
+    protected function visitsKey(): string
+    {
+        return "threads.{$this->id}.visits";
     }
 }
