@@ -24,6 +24,8 @@ class RegistrationTest extends TestCase
     /** @test */
     function user_can_fully_confirm_their_email_addresses()
     {
+        Mail::fake();
+        
         $this->post('/register', [
             'name' => 'John',
             'email' => 'john@example.com',
