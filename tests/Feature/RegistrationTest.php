@@ -44,6 +44,7 @@ class RegistrationTest extends TestCase
         $this->assertTrue($user->fresh()->confirmed);
 
         $response->assertRedirect('/threads');
+        $this->assertNull($user->fresh()->confirmation_token);
     }
 
     /** @test */
