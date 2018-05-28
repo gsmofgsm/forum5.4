@@ -84,17 +84,19 @@ class CreateThreadsTest extends TestCase
     {
         $this->signIn();
 
+        create('App\Thread', [], 2); // 2 random threads to make id's not from 1
+
         $thread = create('App\Thread', ['title' => 'Foo Title']);
 
-        $this->assertEquals($thread->fresh()->slug, 'foo-title');
+        $this->assertEquals('foo-title-' . $thread->id, $thread->fresh()->slug);
 
-//        $this->post('/threads', $thread->toArray());
-//
-//        $this->assertTrue(Thread::whereSlug('foo-title-2')->exists());
-//
-//        $this->post('/threads', $thread->toArray());
-//
-//        $this->assertTrue(Thread::whereSlug('foo-title-3')->exists());
+        $thread2 = $this->postJson('/threads', $thread->toArray())->json();
+
+        $this->assertEquals('foo-title-' . $thread2['id'], $thread2['slug']);
+
+        $thread3 = $this->postJson('/threads', $thread->toArray())->json();
+
+        $this->assertEquals('foo-title-' . $thread3['id'], $thread3['slug']);
     }
 
     /** @test */
