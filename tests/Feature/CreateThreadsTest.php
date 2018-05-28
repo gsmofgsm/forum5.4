@@ -98,6 +98,18 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
+    function a_thread_with_a_title_that_ends_in_a_number_should_generate_the_proper_slug()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Some Title 24', 'slug' => 'some-title-24']);
+
+        $this->post('/threads', $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('some-title-24-2')->exists());
+    }
+
+    /** @test */
     public function guests_cannot_delete_threads()
     {
         $this->withExceptionHandling();
