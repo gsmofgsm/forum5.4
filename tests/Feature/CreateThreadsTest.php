@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -76,6 +77,24 @@ class CreateThreadsTest extends TestCase
 
         $this->publishThread(['channel_id' => 999])
             ->assertStatus(422);
+    }
+
+    /** @test */
+    function a_thread_requires_a_unique_slug()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Foo Title', 'slug' => 'foo-title']);
+
+        $this->assertEquals($thread->fresh()->slug, 'foo-title');
+
+        $this->post('/threads', $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title-2')->exists());
+
+        $this->post('/threads', $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title-3')->exists());
     }
 
     /** @test */
