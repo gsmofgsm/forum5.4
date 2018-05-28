@@ -104,7 +104,7 @@ class CreateThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread', ['title' => 'Some Title 24', 'slug' => 'some-title-24']);
+        $thread = create('App\Thread', ['title' => 'Some Title 24']);
 
         $this->post('/threads', $thread->toArray());
 
