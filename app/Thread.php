@@ -110,30 +110,14 @@ class Thread extends Model
 
     public function setSlugAttribute($value)
     {
-        if(static::whereSlug($slug = str_slug($value))->exists()){
-            $slug = $this->incrementSlug($slug);
-        }
-
-        $this->attributes['slug'] = $slug;
-    }
-
-    private function incrementSlug($slug, $count = 2)
-    {
+        $slug = str_slug($value);
         $original = $slug;
+        $count = 2;
 
         while(static::whereSlug($slug)->exists()){
             $slug = "{$original}-" . $count++;
         }
 
-        return $slug;
-//        $max = static::whereTitle($this->title)->latest('id')->value('slug');
-//
-//        if(is_numeric($max[-1])){
-//            return preg_replace_callback('/(\d+)$/', function ($matches){
-//                return $matches[1] + 1;
-//            }, $max);
-//        }
-//
-//        return "{$slug}-2";
+        $this->attributes['slug'] = $slug;
     }
 }
