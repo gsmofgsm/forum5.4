@@ -28,7 +28,7 @@
         </div>
 
         <!--@can('update', $reply)-->
-        <div class="card-footer level" v-if="canUpdate">
+        <div class="card-footer level" v-if="authorize('updateReply', reply)">
             <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
             <button class="btn btn-xs btn-default ml-auto" @click="markBestReply" v-show="! isBest">Best Reply?</button>
@@ -52,18 +52,12 @@
                 editing: false,
                 body: this.attributes.body,
                 id: this.attributes.id,
-                isBest: false
+                isBest: false,
+                reply: this.attributes
             };
         },
 
         computed: {
-            signedIn() {
-                return window.App.signedIn;
-            },
-            canUpdate() {
-                return this.authorize(user => this.attributes.user_id == user.id);
-                // return this.attributes.user_id == window.App.user.id;
-            },
             ago() {
                 return moment(this.attributes.created_at).fromNow() + '...';
             }
