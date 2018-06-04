@@ -1,5 +1,5 @@
 <template>
-    <div class="card" :id="'reply-'+id">
+    <div class="card" :id="'reply-'+id" :class="isBest ? 'bg-success' : ''">
         <div class="card-header">
             <div class="level">
                 <h5 class="flex">
@@ -31,6 +31,7 @@
         <div class="card-footer level" v-if="canUpdate">
             <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
+            <button class="btn btn-xs btn-default ml-auto" @click="markBestReply" v-show="! isBest">Best Reply?</button>
         </div>
         <!--@endcan-->
     </div>
@@ -50,7 +51,8 @@
             return {
                 editing: false,
                 body: this.attributes.body,
-                id: this.attributes.id
+                id: this.attributes.id,
+                isBest: false
             };
         },
 
@@ -90,6 +92,10 @@
                 this.$emit('deleted', this.attributes.id);
                 // $(this.$el).fadeOut(300);
                 // flash('Your reply has been deleted!');
+            },
+
+            markBestReply() {
+                this.isBest = true;
             }
         }
     }
