@@ -63,6 +63,12 @@
             }
         },
 
+        created() {
+            window.events.$on('best-reply-selected', id => {
+                this.isBest = (id === this.id);
+            });
+        },
+
         methods: {
             update() {
                 axios.patch('/replies/' + this.attributes.id, {
@@ -90,6 +96,10 @@
 
             markBestReply() {
                 this.isBest = true;
+
+                axios.post('/replies/' + this.attributes.id + '/best');
+
+                window.events.$emit('best-reply-selected', this.attributes.id);
             }
         }
     }
