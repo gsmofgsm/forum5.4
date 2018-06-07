@@ -28,12 +28,18 @@
         </div>
 
         <!--@can('update', $reply)-->
-        <div class="card-footer level" v-if="authorize('updateReply', reply)">
-            <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
-            <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
+        <div class="card-footer level">
+            <div v-if="authorize('owns', reply)">
+                <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
+                <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
+            </div>
+
+            <button class="btn btn-xs btn-default ml-auto"
+                    @click="markBestReply"
+                    v-if="authorize('owns', reply.thread)"
+                    v-show="! isBest">Best Reply?</button>
         </div>
 
-        <button class="btn btn-xs btn-default ml-auto" @click="markBestReply" v-if="authorize('updateThread', reply.thread)" v-show="! isBest">Best Reply?</button>
         <!--@endcan-->
     </div>
 
