@@ -64608,7 +64608,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64675,24 +64675,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['attributes'],
+    props: ['reply'],
 
     components: { Favorite: __WEBPACK_IMPORTED_MODULE_0__Favorite_vue___default.a },
 
     data: function data() {
         return {
             editing: false,
-            body: this.attributes.body,
-            id: this.attributes.id,
-            isBest: this.attributes.isBest,
-            reply: this.attributes
+            body: this.reply.body,
+            id: this.reply.id,
+            isBest: this.reply.isBest
         };
     },
 
 
     computed: {
         ago: function ago() {
-            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.attributes.created_at).fromNow() + '...';
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.reply.created_at).fromNow() + '...';
         }
     },
 
@@ -64709,7 +64708,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         update: function update() {
             var _this2 = this;
 
-            axios.patch('/replies/' + this.attributes.id, {
+            axios.patch('/replies/' + this.id, {
                 body: this.body
             }).then(function () {
 
@@ -64721,18 +64720,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         destroy: function destroy() {
-            axios.delete('/replies/' + this.attributes.id);
+            axios.delete('/replies/' + this.id);
 
-            this.$emit('deleted', this.attributes.id);
+            this.$emit('deleted', this.id);
             // $(this.$el).fadeOut(300);
             // flash('Your reply has been deleted!');
         },
         markBestReply: function markBestReply() {
             this.isBest = true;
 
-            axios.post('/replies/' + this.attributes.id + '/best');
+            axios.post('/replies/' + this.id + '/best');
 
-            window.events.$emit('best-reply-selected', this.attributes.id);
+            window.events.$emit('best-reply-selected', this.id);
         }
     }
 });
@@ -65150,8 +65149,8 @@ var render = function() {
         _c("div", { staticClass: "level" }, [
           _c("h5", { staticClass: "flex" }, [
             _c("a", {
-              attrs: { href: "/profiles/" + _vm.attributes.owner.name },
-              domProps: { textContent: _vm._s(_vm.attributes.owner.name) }
+              attrs: { href: "/profiles/" + _vm.reply.owner.name },
+              domProps: { textContent: _vm._s(_vm.reply.owner.name) }
             }),
             _vm._v("\n                said\n                "),
             _c("span", { domProps: { textContent: _vm._s(_vm.ago) } }),
@@ -65159,11 +65158,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm.signedIn
-            ? _c(
-                "div",
-                [_c("favorite", { attrs: { reply: _vm.attributes } })],
-                1
-              )
+            ? _c("div", [_c("favorite", { attrs: { reply: _vm.reply } })], 1)
             : _vm._e()
         ])
       ]),
@@ -67172,7 +67167,7 @@ var render = function() {
           [
             _c("reply", {
               key: reply.id,
-              attrs: { attributes: reply },
+              attrs: { reply: reply },
               on: {
                 deleted: function($event) {
                   _vm.remove(index)

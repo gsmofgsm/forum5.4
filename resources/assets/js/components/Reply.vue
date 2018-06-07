@@ -3,14 +3,14 @@
         <div class="card-header">
             <div class="level">
                 <h5 class="flex">
-                    <a :href="'/profiles/'+attributes.owner.name" v-text="attributes.owner.name"></a>
+                    <a :href="'/profiles/'+reply.owner.name" v-text="reply.owner.name"></a>
                     said
                     <span v-text="ago"></span>
                     ...
                 </h5>
 
                 <div v-if="signedIn">
-                    <favorite :reply="attributes"></favorite>
+                    <favorite :reply="reply"></favorite>
                 </div>
             </div>
         </div>
@@ -50,23 +50,22 @@
     import moment from 'moment';
 
     export default {
-        props: ['attributes'],
+        props: ['reply'],
 
         components: { Favorite },
 
         data() {
             return {
                 editing: false,
-                body: this.attributes.body,
-                id: this.attributes.id,
-                isBest: this.attributes.isBest,
-                reply: this.attributes
+                body: this.reply.body,
+                id: this.reply.id,
+                isBest: this.reply.isBest
             };
         },
 
         computed: {
             ago() {
-                return moment(this.attributes.created_at).fromNow() + '...';
+                return moment(this.reply.created_at).fromNow() + '...';
             }
         },
 
@@ -78,7 +77,7 @@
 
         methods: {
             update() {
-                axios.patch('/replies/' + this.attributes.id, {
+                axios.patch('/replies/' + this.id, {
                     body: this.body
                 })
                 .then(() => {
@@ -94,9 +93,9 @@
             },
 
             destroy() {
-                axios.delete('/replies/' + this.attributes.id);
+                axios.delete('/replies/' + this.id);
 
-                this.$emit('deleted', this.attributes.id);
+                this.$emit('deleted', this.id);
                 // $(this.$el).fadeOut(300);
                 // flash('Your reply has been deleted!');
             },
@@ -104,9 +103,9 @@
             markBestReply() {
                 this.isBest = true;
 
-                axios.post('/replies/' + this.attributes.id + '/best');
+                axios.post('/replies/' + this.id + '/best');
 
-                window.events.$emit('best-reply-selected', this.attributes.id);
+                window.events.$emit('best-reply-selected', this.id);
             }
         }
     }
