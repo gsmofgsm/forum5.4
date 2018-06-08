@@ -10,6 +10,19 @@ class LockThreadsTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
+    function non_administrators_may_not_lock_threads()
+    {
+        $this->signIn();
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+
+        $this->patch($thread->path(), [
+            'locked' => true
+        ])->assertStatus(403);
+
+        $this->assertFalse(!! $thread->fresh()->locked);
+    }
+
+    /** @test */
     function once_locked_a_thread_may_not_receive_new_replies()
     {
         $this->signIn();
