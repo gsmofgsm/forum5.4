@@ -10,7 +10,7 @@ class LockThreadsTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    function an_administrator_can_lock_any_thread()
+    function once_locked_a_thread_may_not_receive_new_replies()
     {
         $this->signIn();
         $thread = create('App\Thread');
