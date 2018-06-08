@@ -12,7 +12,7 @@ class LockThreadsTest extends TestCase
     /** @test */
     function non_administrators_may_not_lock_threads()
     {
-        $this->signIn();
+        $this->withExceptionHandling()->signIn();
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
         $this->post(route('locked-threads.store', $thread))->assertStatus(403);
