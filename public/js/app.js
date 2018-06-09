@@ -67185,10 +67185,12 @@ var render = function() {
         on: { updated: _vm.fetch }
       }),
       _vm._v(" "),
-      _c("new-reply", {
-        attrs: { endpoint: _vm.endpoint },
-        on: { created: _vm.add }
-      })
+      !_vm.$parent.locked
+        ? _c("new-reply", {
+            attrs: { endpoint: _vm.endpoint },
+            on: { created: _vm.add }
+          })
+        : _vm._e()
     ],
     2
   )
