@@ -7,12 +7,12 @@
     import SubscribeButton from '../components/SubscribeButton.vue';
 
     export default {
-        props: ['initialRepliesCount'],
+        props: ['dataRepliesCount', 'dataLocked'],
 
         data() {
             return {
-                repliesCount: this.initialRepliesCount,
-                locked: false
+                repliesCount: this.dataRepliesCount,
+                locked: this.dataLocked
             }
         },
 

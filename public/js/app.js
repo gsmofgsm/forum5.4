@@ -64390,12 +64390,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['initialRepliesCount'],
+    props: ['dataRepliesCount', 'dataLocked'],
 
     data: function data() {
         return {
-            repliesCount: this.initialRepliesCount,
-            locked: false
+            repliesCount: this.dataRepliesCount,
+            locked: this.dataLocked
         };
     },
 
