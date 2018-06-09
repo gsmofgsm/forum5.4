@@ -64473,6 +64473,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -67185,12 +67189,16 @@ var render = function() {
         on: { updated: _vm.fetch }
       }),
       _vm._v(" "),
-      !_vm.$parent.locked
-        ? _c("new-reply", {
+      _vm.$parent.locked
+        ? _c("p", [
+            _vm._v(
+              "\n        This thread has been locked. No more replies are allowed.\n    "
+            )
+          ])
+        : _c("new-reply", {
             attrs: { endpoint: _vm.endpoint },
             on: { created: _vm.add }
           })
-        : _vm._e()
     ],
     2
   )
