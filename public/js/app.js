@@ -64394,7 +64394,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            repliesCount: this.initialRepliesCount
+            repliesCount: this.initialRepliesCount,
+            locked: false
         };
     },
 
