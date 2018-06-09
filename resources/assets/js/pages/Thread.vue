@@ -7,12 +7,21 @@
     import SubscribeButton from '../components/SubscribeButton.vue';
 
     export default {
-        props: ['dataRepliesCount', 'dataLocked'],
+        props: ['thread'],
 
         data() {
             return {
-                repliesCount: this.dataRepliesCount,
-                locked: this.dataLocked
+                repliesCount: this.thread.replies_count,
+                locked: this.thread.locked
+            }
+        },
+
+        methods: {
+            lock () {
+                this.locked = true;
+
+                // ajax
+                axios.post('/locked-threads/' + this.thread.slug);
             }
         },
 
