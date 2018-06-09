@@ -67738,6 +67738,9 @@ module.exports = {
         var prop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'user_id';
 
         return model[prop] === user.id;
+    },
+    isAdmin: function isAdmin() {
+        return ['JohnDoe', 'JaneDoe'].includes(user.name);
     }
 };
 
