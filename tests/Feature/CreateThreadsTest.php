@@ -133,6 +133,21 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
+    function a_thread_can_be_updated()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+
+        $this->patchJson($thread->path(), [
+            'title' => 'Changed',
+            'body' => 'Changed body.'
+        ]);
+        $this->assertEquals('Changed', $thread->fresh()->title);
+        $this->assertEquals('Changed body.', $thread->fresh()->body);
+    }
+
+    /** @test */
     public function guests_cannot_delete_threads()
     {
         $this->withExceptionHandling();
