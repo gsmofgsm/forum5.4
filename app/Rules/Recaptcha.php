@@ -42,6 +42,6 @@ class Recaptcha implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'ReCAPTCHA verification failed. Try again.';
     }
 }
