@@ -133,13 +133,28 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
+    function a_thread_requires_a_title_and_body_to_be_updated()
+    {
+        $this->withExceptionHandling()->signIn();
+
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+
+        $this->patch($thread->path(), [
+            'title' => 'Changed'
+        ])->assertSessionHasErrors('body');
+        $this->patch($thread->path(), [
+            'body' => 'Changed'
+        ])->assertSessionHasErrors('title');
+    }
+
+    /** @test */
     function a_thread_can_be_updated()
     {
         $this->signIn();
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
-        $this->patchJson($thread->path(), [
+        $this->patch($thread->path(), [
             'title' => 'Changed',
             'body' => 'Changed body.'
         ]);
